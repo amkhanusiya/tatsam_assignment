@@ -31,7 +31,7 @@ class _CountriesListScreenState extends State<CountriesListScreen> {
           return Container(
             child: LoadMore(
               onLoadMore: _loadMore,
-              isFinish: value.total == value.countries.length,
+              isFinish: value.countries.length >= value.total,
               child: ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: value.countries.length,
@@ -54,13 +54,11 @@ class _CountriesListScreenState extends State<CountriesListScreen> {
 
   Future<bool> _loadMore() async {
     print('${_viewModel.countries.length} and ${_viewModel.total}');
-    return false;
-    // if (_viewModel.countries.length < _viewModel.total) {
-    //   _offset += 1;
-    //   _viewModel.fetchCountries(_offset);
-    //   return true;
-    // } else {
-    //   return false;
-    // }
+
+    if (_viewModel.countries.length <= _viewModel.total) {
+      _offset += 1;
+      await _viewModel.fetchCountries(_offset);
+    }
+    return _viewModel.countries.length <= _viewModel.total;
   }
 }

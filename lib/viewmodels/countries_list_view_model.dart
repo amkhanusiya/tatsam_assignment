@@ -11,13 +11,9 @@ class CountriesListViewModel extends ChangeNotifier {
   UnmodifiableListView<CountryViewModel> get countries =>
       UnmodifiableListView(_countries);
 
-  int _offset;
-  int limit;
-  int total;
+  int total = 0;
   Future<void> fetchCountries(int page) async {
     final result = await WebService().fetchCountries(page);
-    _offset = result['offset'];
-    limit = result['limit'];
     total = result['total'];
     final List<Country> results = result['countries'] as List<Country>;
     this._countries.addAll(
