@@ -1,5 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+/*
+  class used to save or read countries from shared preference
+*/
 class SharedPref {
   readObject(String key) async {
     final prefs = await SharedPreferences.getInstance();

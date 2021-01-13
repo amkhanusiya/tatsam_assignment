@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tatsam_assignment/viewmodels/country_view_model.dart';
 
+/*
+  single item of country list view 
+*/
 class CountryItem extends StatelessWidget {
   final CountryViewModel country;
   final Function function;

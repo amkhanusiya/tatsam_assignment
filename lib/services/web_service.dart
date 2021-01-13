@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:tatsam_assignment/models/country.dart';
 import 'package:http/http.dart' as http;
 
+/*
+ This class fetch countries from api as per offset/page_no
+ */
 class WebService {
   Future<Map<String, dynamic>> fetchCountries(int offset) async {
     final url = "https://api.first.org/data/v1/countries?offset=$offset";

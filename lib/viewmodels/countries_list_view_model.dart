@@ -8,6 +8,9 @@ import 'package:tatsam_assignment/shared_pref.dart';
 
 import 'country_view_model.dart';
 
+/*
+Use to fetch all countries from service and create a coutries view models list. Also this view model used for operation of favourite/unfavourite of respected country.
+ */
 class CountriesListViewModel extends ChangeNotifier {
   List<CountryViewModel> _countries = List<CountryViewModel>();
   List<CountryViewModel> _favouritedCountries = List<CountryViewModel>();
