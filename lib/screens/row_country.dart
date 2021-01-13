@@ -3,7 +3,11 @@ import 'package:tatsam_assignment/viewmodels/country_view_model.dart';
 
 class CountryItem extends StatelessWidget {
   final CountryViewModel country;
-  CountryItem({this.country});
+  final Function function;
+  CountryItem({
+    this.country,
+    this.function,
+  });
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
@@ -34,7 +38,11 @@ class CountryItem extends StatelessWidget {
       ),
       trailing: IconButton(
         icon: Icon(Icons.favorite),
-        onPressed: () {},
+        onPressed: () {
+          if (function != null) {
+            function(country);
+          }
+        },
         color: country.isFavorite ? Colors.orangeAccent : Colors.grey,
       ),
     );

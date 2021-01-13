@@ -8,8 +8,12 @@ import 'country_view_model.dart';
 
 class CountriesListViewModel extends ChangeNotifier {
   List<CountryViewModel> _countries = List<CountryViewModel>();
+  List<CountryViewModel> _favouritedCountries = List<CountryViewModel>();
+
   UnmodifiableListView<CountryViewModel> get countries =>
       UnmodifiableListView(_countries);
+  UnmodifiableListView<CountryViewModel> get favouritedCountries =>
+      UnmodifiableListView(_favouritedCountries);
 
   int total = 0;
   Future<void> fetchCountries(int page) async {
@@ -19,6 +23,19 @@ class CountriesListViewModel extends ChangeNotifier {
     this._countries.addAll(
         results.map((item) => CountryViewModel(country: item)).toList());
     print('total countries => ${countries.length}');
+    notifyListeners();
+  }
+
+  Future<void> addOrRemoveFavourite(CountryViewModel _country) async {
+    bool _isAvailable = _favouritedCountries
+        .where((item) => item.code == _country.code)
+        .isNotEmpty;
+    _country.isFavorite = !_isAvailable;
+    if (_isAvailable) {
+      _favouritedCountries.remove(_country);
+    } else {
+      _favouritedCountries.add(_country);
+    }
     notifyListeners();
   }
 }

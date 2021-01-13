@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tatsam_assignment/screens/favourite_countries_list_screen.dart';
 import 'package:tatsam_assignment/screens/row_country.dart';
 import 'package:tatsam_assignment/viewmodels/countries_list_view_model.dart';
 import 'package:loadmore/loadmore.dart';
+import 'package:tatsam_assignment/viewmodels/country_view_model.dart';
 
 class CountriesListScreen extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _CountriesListScreenState extends State<CountriesListScreen> {
   @override
   void initState() {
     _viewModel = Provider.of<CountriesListViewModel>(context, listen: false);
+
     _viewModel.fetchCountries(_offset);
     super.initState();
   }
@@ -24,7 +27,20 @@ class _CountriesListScreenState extends State<CountriesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Country List'),
+        title: Text(
+          'Country List',
+          style: TextStyle(color: Colors.white),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(FavouriteCoutryListScreen.ROUTE_NAME);
+            },
+            color: Colors.white,
+          ),
+        ],
       ),
       body: Consumer<CountriesListViewModel>(
         builder: (context, value, child) {
@@ -39,6 +55,7 @@ class _CountriesListScreenState extends State<CountriesListScreen> {
                   final _country = value.countries[index];
                   return CountryItem(
                     country: _country,
+                    function: addOrRemoveFromFavourite,
                   );
                 },
               ),
@@ -60,5 +77,9 @@ class _CountriesListScreenState extends State<CountriesListScreen> {
       await _viewModel.fetchCountries(_offset);
     }
     return _viewModel.countries.length <= _viewModel.total;
+  }
+
+  void addOrRemoveFromFavourite(CountryViewModel _country) {
+    _viewModel.addOrRemoveFavourite(_country);
   }
 }
