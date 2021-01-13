@@ -22,7 +22,6 @@ class CountriesListViewModel extends ChangeNotifier {
     final List<Country> results = result['countries'] as List<Country>;
     this._countries.addAll(
         results.map((item) => CountryViewModel(country: item)).toList());
-    print('total countries => ${countries.length}');
     notifyListeners();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tatsam_assignment/screens/country_list.dart';
 import 'package:tatsam_assignment/screens/row_country.dart';
 import 'package:tatsam_assignment/viewmodels/countries_list_view_model.dart';
 import 'package:tatsam_assignment/viewmodels/country_view_model.dart';
@@ -41,16 +42,9 @@ class _FavouriteCoutryListScreenState extends State<FavouriteCoutryListScreen> {
         builder: (context, value, child) {
           return Container(
             child: value.favouritedCountries.isNotEmpty
-                ? ListView.separated(
-                    separatorBuilder: (context, index) => Divider(),
-                    itemCount: value.favouritedCountries.length,
-                    itemBuilder: (context, index) {
-                      final _country = value.favouritedCountries[index];
-                      return CountryItem(
-                        country: _country,
-                        function: addOrRemoveFromFavourite,
-                      );
-                    },
+                ? CountryList(
+                    list: value.favouritedCountries,
+                    viewModel: _viewModel,
                   )
                 : Center(
                     child: Text('No data found'),
@@ -59,9 +53,5 @@ class _FavouriteCoutryListScreenState extends State<FavouriteCoutryListScreen> {
         },
       ),
     );
-  }
-
-  void addOrRemoveFromFavourite(CountryViewModel _country) {
-    _viewModel.addOrRemoveFavourite(_country);
   }
 }
