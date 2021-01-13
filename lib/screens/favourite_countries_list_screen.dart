@@ -47,6 +47,7 @@ class _FavouriteCoutryListScreenState extends State<FavouriteCoutryListScreen> {
                       final _country = value.favouritedCountries[index];
                       return CountryItem(
                         country: _country,
+                        isFavourited: true,
                       );
                     },
                   )
