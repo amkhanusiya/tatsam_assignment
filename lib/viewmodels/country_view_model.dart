@@ -17,4 +17,18 @@ class CountryViewModel {
   String get code {
     return this.country.code;
   }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'region': region,
+        'code': code,
+        'isFavorite': isFavorite,
+      };
+
+  factory CountryViewModel.fromJson(Map<String, dynamic> json) {
+    return CountryViewModel(
+      country: Country.fromJson(json['code'], json),
+      isFavorite: json['isFavorite'],
+    );
+  }
 }

@@ -8,7 +8,7 @@ class Country {
   factory Country.fromJson(String key, Map<String, dynamic> json) {
     // print('key => $key and $json');
     return Country(
-      name: json["country"],
+      name: json["country"] != null ? json["country"] : json["name"],
       region: json["region"],
       code: key,
     );
