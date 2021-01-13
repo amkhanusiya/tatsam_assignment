@@ -14,6 +14,7 @@ dependencies:
   provider: ^4.3.2+3
   loadmore: ^1.0.4
   shared_preferences: ^0.5.12+4
+  connectivity: ^2.0.2
 
 dev_dependencies:
   flutter_test:

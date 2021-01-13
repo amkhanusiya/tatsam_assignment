@@ -34,7 +34,10 @@ class CountriesListViewModel extends ChangeNotifier {
     this._countries.forEach((item) => {
           this._favouritedCountries.forEach(
                 (favItem) => {
-                  if (favItem.code == item.code) {item.isFavorite = true}
+                  if (favItem.code == item.code &&
+                      favItem.name == item.name &&
+                      favItem.region == item.region)
+                    {item.isFavorite = true}
                 },
               ),
         });
@@ -53,7 +56,7 @@ class CountriesListViewModel extends ChangeNotifier {
       _favouritedCountries.add(_country);
     }
     var json = jsonEncode(_favouritedCountries.map((e) => e.toJson()).toList());
-    print(json);
+    // print(json);
     await _sharedPref.saveObject(COUNTRIES, json);
     notifyListeners();
   }

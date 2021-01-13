@@ -5,8 +5,7 @@ import 'package:http/http.dart' as http;
 
 class WebService {
   Future<Map<String, dynamic>> fetchCountries(int offset) async {
-    final url =
-        "https://api.first.org/data/v1/countries?offset=$offset&limit=50";
+    final url = "https://api.first.org/data/v1/countries?offset=$offset";
     print(url);
     final response = await http.get(url);
     // print(response.body);
